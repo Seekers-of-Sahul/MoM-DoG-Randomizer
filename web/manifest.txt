@@ -1,0 +1,11 @@
+__init__.py
+__main__.py
+core.py
+data/text_fixes.json
+disc.py
+families.py
+mes.py
+mesdec.py
+patches.py
+rando.py
+textfix.py

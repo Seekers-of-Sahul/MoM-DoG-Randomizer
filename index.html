@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Master of Monsters: Disciples of Gaia — Rebalance &amp; Randomizer</title>
+<style>
+  :root {
+    --bg: #14110f; --panel: #1e1a17; --line: #3a322b; --text: #ece4d8; --dim: #a89c8c;
+    --accent: #d9a441; --accent-ink: #1a1408; --bad: #e0705c; --good: #8fc07a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1 { font-size: 26px; margin: 0 0 4px; letter-spacing: .01em; }
+  .sub { color: var(--dim); margin: 0 0 28px; }
+  section { background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+            padding: 18px 20px; margin: 0 0 16px; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .12em; color: var(--accent);
+       margin: 0 0 12px; }
+  label { display: flex; gap: 10px; align-items: baseline; margin: 8px 0; }
+  label.row { justify-content: space-between; }
+  .note { color: var(--dim); font-size: 13px; margin: -4px 0 8px 28px; }
+  .note.top { margin: 0 0 10px; }
+  input[type=checkbox] { accent-color: var(--accent); width: 16px; height: 16px; flex: none;
+                         position: relative; top: 2px; }
+  select, input[type=text], input[type=number] {
+    background: var(--bg); color: var(--text); border: 1px solid var(--line); border-radius: 6px;
+    padding: 6px 8px; font: inherit; }
+  input[type=number] { width: 64px; }
+  .grow { flex: 1; }
+  .file { display: block; border: 1px dashed var(--line); border-radius: 8px; padding: 16px;
+          text-align: center; cursor: pointer; color: var(--dim); }
+  .file.has { border-style: solid; color: var(--text); }
+  .file input { display: none; }
+  .seed { display: flex; gap: 8px; }
+  .seed input { flex: 1; }
+  button { font: inherit; border-radius: 6px; border: 1px solid var(--line); background: var(--bg);
+           color: var(--text); padding: 6px 12px; cursor: pointer; }
+  button.go { width: 100%; padding: 12px; font-weight: 600; font-size: 16px; background: var(--accent);
+              color: var(--accent-ink); border: none; }
+  button:disabled { opacity: .45; cursor: default; }
+  .indent { margin-left: 28px; }
+  .off { opacity: .45; pointer-events: none; }
+  #status { margin: 14px 0 0; color: var(--dim); white-space: pre-wrap; }
+  #status.err { color: var(--bad); }
+  #out a { display: inline-block; margin: 8px 10px 0 0; color: var(--accent-ink); background: var(--good);
+           padding: 8px 12px; border-radius: 6px; text-decoration: none; font-weight: 600; }
+  details { color: var(--dim); }
+  summary { cursor: pointer; }
+  code { background: var(--bg); padding: 1px 5px; border-radius: 4px; }
+  footer { color: var(--dim); font-size: 13px; margin-top: 24px; }
+  footer a, .sub a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Master of Monsters: Disciples of Gaia</h1>
+  <p class="sub">Rebalance &amp; randomizer for the PlayStation game · <span id="ver">loading…</span> ·
+     <a id="src" href="https://github.com/">source &amp; full notes</a></p>
+
+  <section>
+    <h2>Disc</h2>
+    <label class="file" id="drop"><input type="file" id="file" accept=".bin">
+      <span id="fname">Choose the <b>Track 1 .bin</b> of your bin/cue rip<br>
+      US (SLUS-00595) or European (SLES-00244) · it never leaves your computer</span></label>
+  </section>
+
+  <section>
+    <h2>Rebalance</h2>
+    <p class="note top">Always included: bug fixes (real random numbers, level cap), swappable equipment,
+      stacking tower items, experience carry-over, magic attack scaling, Goblin line, Slime buff.</p>
+    <label><input type="checkbox" id="combat_exp" checked> Combat experience</label>
+    <div class="note">Every fight gives experience, and a unit that reaches 100 levels up without a kill.</div>
+    <label><input type="checkbox" id="commander_buffs" checked> Stronger disciples</label>
+    <div class="note">Buffs the five disciples other than Justice.</div>
+    <label><input type="checkbox" id="text_fixes" checked> Proofread English text</label>
+    <div class="note">Rewritten story, tutorials, encyclopedia, item and spell descriptions; corrected
+      monster and item names.</div>
+    <label class="row">Your summon lists
+      <select id="summons">
+        <option value="mod" selected>Rebalance lists</option>
+        <option value="vanilla">Original</option>
+        <option value="shuffle">Randomized</option>
+      </select></label>
+  </section>
+
+  <section>
+    <h2>Speed</h2>
+    <label><input type="checkbox" id="fast_load" checked> Faster loading</label>
+    <div class="note">Shorter loading screens, memory card checks and tutorial pop-ups.</div>
+    <label class="row">Game speed
+      <select id="game_speed">
+        <option value="">Normal</option>
+        <option value="fast">Fast (about 1.5×)</option>
+        <option value="faster" selected>Faster (2×)</option>
+      </select></label>
+    <label><input type="checkbox" id="battle_music" checked> Battle music</label>
+    <div class="note">Turn off to keep the map music during fights: no music has to load, so battle
+      animations start much faster.</div>
+  </section>
+
+  <section>
+    <h2>Challenge</h2>
+    <label><input type="checkbox" id="hardcore"> Hardcore: no saving during battles</label>
+    <label class="row">Difficulty
+      <select id="lock_difficulty">
+        <option value="">Free to change</option>
+        <option value="normal">Locked to Normal</option>
+        <option value="hard">Locked to Hard</option>
+      </select></label>
+  </section>
+
+  <section>
+    <h2>Stage select</h2>
+    <label class="row">Stage hub
+      <select id="hub">
+        <option value="">Off (story order)</option>
+        <option value="progressive">Progressive</option>
+        <option value="open">Open: all stages</option>
+        <option value="shuffled">Shuffled</option>
+      </select></label>
+    <div class="note" style="margin-left:0">After every battle, pick the next stage on the Map Mode
+      screen. Progressive opens stages in story order, Shuffled in a random order (stage 22 last).</div>
+    <div id="hubopts" class="off">
+      <label><input type="checkbox" id="skip_tutorial"> Skip the tutorial</label>
+      <label><input type="checkbox" id="mailbox"> Archipelago mailbox</label>
+      <div class="note">For multiworld clients: received monsters join your army between battles.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Draft mode</h2>
+    <label><input type="checkbox" id="draft"> Draft mode (roguelike)</label>
+    <div class="note">No summoning. You start with 3 monsters, and after each battle new ones join and you
+      trim your army to a growing limit.</div>
+    <div id="draftopts" class="indent off">
+      <label class="row">Monsters offered after each battle <input type="number" id="draft_size" min="1" max="6" value="6"></label>
+      <label class="row">Army limit grows by <input type="number" id="roster_step" min="1" max="29" value="3"></label>
+      <label class="row">Starting monsters <input type="text" id="start" class="grow" style="max-width:300px"
+        placeholder="random, or e.g. Goblin, Gremlin, Angel"></label>
+    </div>
+  </section>
+
+  <section>
+    <h2>Generate</h2>
+    <label class="row">Seed <span class="seed" style="flex:1;max-width:420px">
+      <input type="text" id="seed" placeholder="random"><button id="dice" type="button">New</button></span></label>
+    <label><input type="checkbox" id="ppf"> Also make a PPF patch</label>
+    <button class="go" id="go" disabled>Loading…</button>
+    <div id="status"></div>
+    <div id="out"></div>
+    <details style="margin-top:14px"><summary>Using the patched file</summary>
+      <p>Put the new .bin next to your other track files and point your .cue's first <code>FILE</code>
+      line at it (or rename it to the original Track 1 name). Without the audio tracks the game freezes
+      after the intro video. Same disc + same seed + same options = same game.</p>
+      <p>Needs a desktop browser with about 1.5 GB of free memory; nothing is uploaded.</p>
+    </details>
+  </section>
+
+  <footer>Not affiliated with ASCII, Toshiba EMI or SystemSoft. You need your own copy of the game.</footer>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const worker = new Worker('web/worker.js');
+let file = null, ready = false, busy = false, urls = [];
+
+function status(text, err) { const s = $('status'); s.textContent = text; s.className = err ? 'err' : ''; }
+function canGo() { $('go').disabled = !(ready && file && !busy);
+  $('go').textContent = !ready ? 'Loading…' : busy ? 'Working…' : file ? 'Generate' : 'Choose a disc first'; }
+function newSeed() { $('seed').value = String(Math.floor(Math.random() * 1e9)); }
+
+$('file').onchange = () => {
+  file = $('file').files[0] || null;
+  $('drop').classList.toggle('has', !!file);
+  $('fname').textContent = file ? file.name + ' · ' + (file.size / 1048576).toFixed(1) + ' MB' : '';
+  if (file && file.size < 100e6) status('That file looks too small for Track 1 of this game (about 166 MB).', true);
+  canGo();
+};
+$('dice').onclick = newSeed;
+$('hub').onchange = () => $('hubopts').classList.toggle('off', !$('hub').value);
+$('draft').onchange = () => $('draftopts').classList.toggle('off', !$('draft').checked);
+
+function options() {
+  const o = {
+    combat_exp: $('combat_exp').checked, commander_buffs: $('commander_buffs').checked,
+    text_fixes: $('text_fixes').checked, summons: $('summons').value,
+    fast_load: $('fast_load').checked, game_speed: $('game_speed').value || null,
+    battle_music: $('battle_music').checked,
+    hardcore: $('hardcore').checked, lock_difficulty: $('lock_difficulty').value || null,
+  };
+  if ($('hub').value) {
+    o.hub = {mode: $('hub').value, skip_tutorial: $('skip_tutorial').checked};
+    if ($('mailbox').checked) o.mailbox = true;
+  }
+  if ($('draft').checked) {
+    const st = $('start').value.split(',').map(s => s.trim()).filter(Boolean);
+    o.draft = {size: Math.min(6, Math.max(1, +$('draft_size').value || 6)),
+               step: Math.min(29, Math.max(1, +$('roster_step').value || 3)), start: st.length ? st : null};
+  }
+  return o;
+}
+
+$('go').onclick = async () => {
+  if (!$('seed').value.trim()) newSeed();
+  busy = true; canGo();
+  urls.forEach(URL.revokeObjectURL); urls = []; $('out').innerHTML = '';
+  status('Reading ' + file.name + '…');
+  const bin = await file.arrayBuffer();
+  worker.postMessage({type: 'run', bin, opts: options(), seed: $('seed').value.trim(), ppf: $('ppf').checked}, [bin]);
+};
+
+function link(data, name, mime) {
+  const u = URL.createObjectURL(new Blob([data], {type: mime})); urls.push(u);
+  const a = document.createElement('a'); a.href = u; a.download = name; a.textContent = name;
+  $('out').appendChild(a);
+}
+
+worker.onmessage = ({data: m}) => {
+  if (m.type === 'status') status(m.text);
+  else if (m.type === 'ready') { ready = true; $('ver').textContent = 'version ' + m.version; status(''); canGo(); }
+  else if (m.type === 'error') { busy = false; status('Something went wrong: ' + m.text, true); canGo(); }
+  else if (m.type === 'done') {
+    busy = false; canGo();
+    const seed = $('seed').value.trim(), base = 'MoM_DoG_' + m.info.version + '_' + seed;
+    link(m.bin, base + '.bin', 'application/octet-stream');
+    if (m.ppf) link(m.ppf, base + '.ppf', 'application/octet-stream');
+    link(m.spoiler, base + '_spoiler.json', 'application/json');
+    status((m.info.version === 'PAL' ? 'European' : 'US') + ' disc, seed ' + seed + '. Patched MD5 ' + m.info.md5_out +
+      (m.info.known ? '' : '\nNote: your Track 1 is not a known clean dump (MD5 ' + m.info.md5_in + '); patched anyway.'));
+  }
+};
+worker.onerror = e => status('Could not start: ' + e.message, true);
+newSeed();
+// https://user.github.io/repo/ -> https://github.com/user/repo
+if (location.hostname.endsWith('.github.io'))
+  $('src').href = 'https://github.com/' + location.hostname.split('.')[0] + '/' + location.pathname.split('/')[1];
+</script>
+</body>
+</html>
