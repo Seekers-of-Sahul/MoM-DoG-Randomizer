@@ -193,6 +193,22 @@ def build(version, exe_in, monst_in, text_in, opts=None, face_in=None):
       # stage 5 (Knight): vanilla 7 + Lizardman, otherwise only a bad-luck fusion result
       set_list(5, [('Gremlin', 4), ('Banshee', 2), ('Dragon', 5), ('Roc', 4),
                  ('Cherub', 4), ('Mermaid', 2), ('Serpent', 3), ('Lizardman', 6)])
+    elif opts['summon_lists'] == 'balanced':
+      # Public early lists: every map offers about three Law, two to three Neutral and three Chaos units
+      # (each disciple has cheap summons whatever their alignment), a flyer or two, humans and monsters
+      # mixed, at the original maps' levels. Every human base unit stays summonable somewhere.
+      set_list(0, [('Soldier', 1), ('Witch', 1), ('Fairy', 1), ('Amazon', 1),
+                   ('Troll', 1), ('Barbarian', 1), ('Goblin', 1), ('Gremlin', 1)])
+      set_list(1, [('Cherub', 2), ('Elf', 2), ('Ancient', 2), ('Unicorn', 2),
+                   ('Dragon', 1), ('Magician', 2), ('Skeleton', 2), ('Banshee', 2)])
+      set_list(2, [('Soldier', 3), ('Witch', 3), ('Elf', 2), ('Amazon', 3),
+                   ('Harpy', 2), ('Barbarian', 3), ('Magician', 3), ('Roc', 2)])
+      set_list(3, [('Soldier', 4), ('Cherub', 2), ('Elf', 3), ('Neophyte', 4),
+                   ('Unicorn', 4), ('Wolfwere', 3), ('Gremlin', 2), ('Skeleton', 3)])
+      set_list(4, [('Fighter', 5), ('Cherub', 3), ('Mermaid', 2), ('Serpent', 2),
+                   ('Harpy', 4), ('Berserker', 5), ('Octopus', 2), ('Ghost', 2)])
+      set_list(5, [('Witch', 4), ('Cherub', 4), ('Mermaid', 2), ('Dragon', 5),
+                   ('Serpent', 3), ('Gremlin', 4), ('Banshee', 2), ('Lizardman', 6)])
     elif isinstance(opts['summon_lists'], dict):
         for stage, entries in opts['summon_lists'].items():
             assert len(entries) <= 8

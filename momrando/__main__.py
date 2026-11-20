@@ -23,8 +23,9 @@ def main(argv=None):
     g.add_argument('--no-battle-music', action='store_true', help='keep the map music in fights (no music '
                    'loads, so battles start faster)')
     g = p.add_argument_group('randomizer')
-    g.add_argument('--summons', choices=['vanilla', 'mod', 'shuffle'], default='vanilla',
-                   help="player summon lists: vanilla, the rebalance mod's early lists, or shuffled")
+    g.add_argument('--summons', choices=['vanilla', 'balanced', 'mod', 'shuffle'], default='vanilla',
+                   help="player summon lists: vanilla, balanced (rebalanced early maps, a mix of alignments), "
+                        "mod (the original rebalance patch's lists), or shuffled")
     g.add_argument('--hardcore', action='store_true', help='no saving during battles (save between them only)')
     g.add_argument('--lock-difficulty', choices=['normal', 'hard'], help='lock Game Lev. to this setting')
     g.add_argument('--hub', choices=['progressive', 'open', 'shuffled'],

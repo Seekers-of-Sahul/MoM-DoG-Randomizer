@@ -78,12 +78,15 @@
     <label><input type="checkbox" id="text_fixes" checked> Proofread English text</label>
     <div class="note">Rewritten story, tutorials, encyclopedia, item and spell descriptions; corrected
       monster and item names.</div>
-    <label class="row">Your summon lists
+    <label class="row">Summon lists (first six maps)
       <select id="summons">
-        <option value="mod" selected>Rebalance lists</option>
+        <option value="balanced" selected>Rebalanced</option>
         <option value="vanilla">Original</option>
         <option value="shuffle">Randomized</option>
       </select></label>
+    <div class="note" style="margin-left:0">Rebalanced: every early map offers Law, Neutral and Chaos units
+      (cheap summons for any disciple), flyers, and both humans and monsters. Randomized: all maps, each
+      slot keeps its movement type and a similar level.</div>
   </section>
 
   <section>
@@ -125,8 +128,6 @@
       screen. Progressive opens stages in story order, Shuffled in a random order (stage 22 last).</div>
     <div id="hubopts" class="off">
       <label><input type="checkbox" id="skip_tutorial"> Skip the tutorial</label>
-      <label><input type="checkbox" id="mailbox"> Archipelago mailbox</label>
-      <div class="note">For multiworld clients: received monsters join your army between battles.</div>
     </div>
   </section>
 
@@ -193,7 +194,6 @@ function options() {
   };
   if ($('hub').value) {
     o.hub = {mode: $('hub').value, skip_tutorial: $('skip_tutorial').checked};
-    if ($('mailbox').checked) o.mailbox = true;
   }
   if ($('draft').checked) {
     const st = $('start').value.split(',').map(s => s.trim()).filter(Boolean);

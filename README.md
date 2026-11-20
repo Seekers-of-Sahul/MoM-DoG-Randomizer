@@ -29,7 +29,7 @@ You need your own copy of the game as a bin/cue rip. Nothing from the game is in
 - **Stacking tower items:** a tower item you already have adds its charges to your copy (max 99).
 - **Experience carry-over** past a level-up, **magic attack scaling** with level (like physical attacks).
 - **Evolutions:** Goblin → Orc (8) → Overlord (25), Wolfwere → Werewolf (11); the Goblin line is Chaotic.
-  Slime is a little sturdier. Stage 5 gets Lizardman as its 8th summon.
+  Slime is a little sturdier.
 - Localization fixes from earlier versions (spell tiers Lv.1–Lv.4, Imp, Peryton, Siren, attack names).
 
 ### Options
@@ -38,7 +38,7 @@ You need your own copy of the game as a bin/cue rip. Nothing from the game is in
 | Combat experience | on | every fight gives 8 + (enemy level − own level) exp; reaching 100 levels up without a kill |
 | Stronger disciples | on | HP, defence and agility buffs for the five disciples other than Justice |
 | Proofread English text | on | rewritten story, tutorials, encyclopedia, item and spell text; corrected monster and item names (e.g. Necron → Lucifer, Strong Arm → Strong Gloves) |
-| Summon lists | rebalance | rebalance lists (every monster base unit summonable early), original, or randomized (each slot keeps its movement type and a similar level) |
+| Summon lists | rebalanced | rebalanced (maps 0–5 each offer Law, Neutral and Chaos units, flyers, humans and monsters; Lizardman joins map 5), original, or randomized (each slot keeps its movement type and a similar level) |
 | Faster loading | on (web) | one disc request per file, a small load cache, quick memory card check at boot, faster map drawing, no 4 s black screen after videos |
 | Game speed | faster (web) | normal, fast (~1.5×) or faster (2×): the game logic runs every frame instead of every other frame |
 | Battle music | on | off keeps the map music during fights, so nothing has to load and battles start much faster |
@@ -46,7 +46,6 @@ You need your own copy of the game as a bin/cue rip. Nothing from the game is in
 | Difficulty lock | off | Game Lev. fixed to Normal or Hard |
 | Stage hub | off | after every battle pick the next stage on the Map Mode screen: progressive, open, or shuffled order |
 | Skip tutorial | off | with the hub: a new game goes straight to the hub |
-| Archipelago mailbox | off | with the hub: monsters a client puts in the mailbox join your army between battles |
 | Draft mode | off | roguelike: no summoning, 3 starting monsters, new monsters offered after each battle, army limit grows by 3 per battle |
 
 ## Command line
