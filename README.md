@@ -61,27 +61,5 @@ python -m momrando --help
 Writes `<input>_rando_<seed>.bin`, a spoiler log, and optionally a PPF patch.
 Command-line defaults are the original game's: speed options are off unless you pass them.
 
-## For Archipelago clients and tools
-
-Hub state lives in the story flags (saved with every save): `F[60..63]` unlocked battle bits,
-`F[64..67]` cleared bits, `F[68..69]` monsters-received counter. Flags start at RAM `0x800CDF38` (US) /
-`0x800CE0E8` (PAL). Mailbox: RAM `0x80065FF4` (US) / `0x800661A4` (PAL), 8 × (monster id, level),
-id 255 = empty; write the level, then the id. `tools/momrando_debug.lua` (BizHawk 2.9+) shows the state and
-can unlock stages and send monsters.
-
-## Repository layout
-
-- `index.html`, `web/` — the GitHub Pages patcher (`web/worker.js` loads Pyodide and runs `momrando`;
-  `web/manifest.txt` lists the package files it fetches — update it when adding files).
-- `momrando/` — the patcher: `disc.py` (ISO/BIND.DAT access, PPF), `patches.py` (all code and data patches,
-  US and PAL address tables), `rando.py` / `families.py` (randomizer), `mes.py` / `mesdec.py` (story script
-  re-encoder), `textfix.py` + `data/text_fixes.json` (proofread text).
-- `tools/` — BizHawk debug script.
-
-## Publishing the page
-
-Settings → Pages → *Deploy from a branch* → `main`, folder `/ (root)`. The `.nojekyll` file must stay
-(Jekyll would otherwise drop `__init__.py` and `__main__.py`).
-
 ---
 Not affiliated with ASCII, Toshiba EMI or SystemSoft.
