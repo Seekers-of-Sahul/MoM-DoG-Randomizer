@@ -28,7 +28,7 @@ You need your own copy of the game as a bin/cue rip. Nothing from the game is in
   to your inventory.
 - **Stacking tower items:** a tower item you already have adds its charges to your copy (max 99).
 - **Experience carry-over** past a level-up, **magic attack scaling** with level (like physical attacks).
-- **Evolutions:** Goblin → Orc (8) → Overlord (25), Wolfwere → Werewolf (11); the Goblin line is Chaotic.
+- **Evolutions:** Goblin → Orc (8) → Yaksha (25), Kobold → Werewolf (11); the Goblin line is Chaotic.
   Slime is a little sturdier.
 - Localization fixes from earlier versions (spell tiers Lv.1–Lv.4, Imp, Peryton, Siren, attack names).
 
