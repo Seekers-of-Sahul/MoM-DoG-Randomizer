@@ -3,7 +3,7 @@
 A rebalance mod, speed-up patch, proofread English script and randomizer for the PlayStation
 strategy game *Master of Monsters: Disciples of Gaia* (US SLUS-00595 and European SLES-00244, English).
 
-**Web patcher:** open the GitHub Pages site of this repository (`https://<user>.github.io/<repo>/](https://github.com/Seekers-of-Sahul/MoM-DoG-Randomizer)`),
+**Web patcher:** open the GitHub Pages site of this repository (`https://<user>.github.io/<repo>/](https://github.com/Seekers-of-Sahul/MoM-DoG-Randomizer`),
 choose your Track 1 `.bin`, pick options, download the patched file. Everything runs in your browser
 (Python via Pyodide); the disc image is never uploaded.
 
