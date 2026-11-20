@@ -38,7 +38,7 @@ You need your own copy of the game as a bin/cue rip. Nothing from the game is in
 | Combat experience | on | every fight gives 8 + (enemy level − own level) exp; reaching 100 levels up without a kill |
 | Stronger disciples | on | HP, defence and agility buffs for the five disciples other than Justice |
 | Proofread English text | on | rewritten story, tutorials, encyclopedia, item and spell text; corrected monster and item names (e.g. Necron → Lucifer, Strong Arm → Strong Gloves) |
-| Summon lists | rebalance | rebalance lists (every human base unit summonable early), original, or randomized (each slot keeps its movement type and a similar level) |
+| Summon lists | rebalance | rebalance lists (every monster base unit summonable early), original, or randomized (each slot keeps its movement type and a similar level) |
 | Faster loading | on (web) | one disc request per file, a small load cache, quick memory card check at boot, faster map drawing, no 4 s black screen after videos |
 | Game speed | faster (web) | normal, fast (~1.5×) or faster (2×): the game logic runs every frame instead of every other frame |
 | Battle music | on | off keeps the map music during fights, so nothing has to load and battles start much faster |
